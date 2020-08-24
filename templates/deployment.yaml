@@ -25,14 +25,16 @@ spec:
       {{- end }}
       serviceAccountName: {{ include "capsule.serviceAccountName" . }}
       priorityClassName: {{ .Values.priorityClassName }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
@@ -70,7 +72,7 @@ spec:
           resources:
             {{- toYaml .Values.manager.resources | nindent 12 }}
           securityContext:
-            {{- toYaml .Values.manager.securityContext | nindent 12 }}
+            allowPrivilegeEscalation: false
         - name: kube-rbac-proxy
           image: {{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}
           imagePullPolicy: IfNotPresent
@@ -85,3 +87,5 @@ spec:
             protocol: TCP
           resources:
             {{- toYaml .Values.proxy.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
