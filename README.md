@@ -86,6 +86,29 @@ Parameter | Description | Default
 `affinity` | Set affinity rules for the Capsule pod. | `{}`
 `podSecurityPolicy.enabled` | Specify if a Pod Security Policy must be created. | `false`
 
+## Created resources
+This Helm Chart cretes the following Kubernetes resources in the release namespace:
+
+* Capsule Namespace
+* Capsule Operator Deployment
+* Capsule Service
+* CA Secret
+* Certfificate Secret
+* Tenant Custom Resource Definition
+* MutatingWebHookConfiguration
+* ValidatingWebHookConfiguration
+* RBAC Cluster Roles
+* Metrics Service
+
+And optionally, depending on the values set:
+
+* Capsule ServiceAccount
+* PodSecurityPolicy
+* RBAC ClusterRole and RoleBinding for pod security policy
+
+
+
+
 ## Notes on installing Custom Resource Definitions with Helm3
 Capsule, as many other add-ons, defines its own set of Custom Resource Definitions (CRDs). Helm3 removed the old CRDs installation method for a more simple methodology. In the Helm Chart, there is now a special directory called `crds` to hold the CRDs. These CRDs are not templated, but will be installed by default when running a `helm install` for the chart. If the CRDs already exist (for example, you already executed `helm install`), it will be skipped with a warning. When you wish to skip the CRDs installation, and do not see the warning, you can pass the `--skip-crds` flag to the `helm install` command.
 
