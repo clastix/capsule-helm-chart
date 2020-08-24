@@ -86,6 +86,8 @@ Parameter | Description | Default
 `affinity` | Set affinity rules for the Capsule pod. | `{}`
 `podSecurityPolicy.enabled` | Specify if a Pod Security Policy must be created. | `false`
 
+## Notes on installing Custom Resource Definitions with Helm3
+Capsule, as many other add-ons, defines its own set of Custom Resource Definitions (CRDs). Helm3 removed the old CRDs installation method for a more simple methodology. In the Helm Chart, there is now a special directory called `crds` to hold the CRDs. These CRDs are not templated, but will be installed by default when running a `helm install` for the chart. If the CRDs already exist (for example, you already executed `helm install`), it will be skipped with a warning. When you wish to skip the CRDs installation, and do not see the warning, you can pass the `--skip-crds` flag to the `helm install` command.
 
 ## More
 See Capsule [use cases](https://github.com/clastix/capsule/blob/master/use_cases.md) for more information about how to use Capsule.
