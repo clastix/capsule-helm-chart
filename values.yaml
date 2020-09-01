@@ -6,12 +6,14 @@ namespace:
   create: false
   name: ""
 force_tenant_prefix: false
+protected_namespace_regex: ""
+capsule_user_group: "capsule.clastix.io"
 log_level: 4
 manager:
   image:
     repository: quay.io/clastix/capsule
     pullPolicy: IfNotPresent
-    tag: ''
+    tag: ""
   resources:
     limits:
       cpu: 200m

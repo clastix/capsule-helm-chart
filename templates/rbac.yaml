@@ -1,34 +1,6 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "capsule.fullname" . }}-namespace:deleter
-  labels:
-    {{- include "capsule.labels" . | nindent 4 }}
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - namespaces
-  verbs:
-  - delete
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ include "capsule.fullname" . }}-namespace:provisioner
-  labels:
-    {{- include "capsule.labels" . | nindent 4 }}
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - namespaces
-  verbs:
-  - create
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
   name: {{ include "capsule.fullname" . }}-proxy-role
   labels:
     {{- include "capsule.labels" . | nindent 4 }}
@@ -87,18 +59,3 @@ subjects:
 - kind: ServiceAccount
   name: {{ include "capsule.serviceAccountName" . }}
   namespace: {{ include "capsule.namespace" . }}
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ include "capsule.fullname" . }}-namespace:provisioner
-  labels:
-    {{- include "capsule.labels" . | nindent 4 }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: {{ include "capsule.fullname" . }}-namespace:provisioner
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: capsule.clastix.io

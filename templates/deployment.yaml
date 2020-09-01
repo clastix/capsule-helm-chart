@@ -51,6 +51,8 @@ spec:
           - --enable-leader-election
           - --zap-log-level={{ default 4 .Values.log_level }}
           - --force-tenant-prefix={{ default false .Values.force_tenant_prefix }}
+          - --protected-namespace-regex={{ default "" .Values.protected_namespace_regex }}
+          - --capsule-user-group={{ default "capsule.clastix.io" .Values.capsule_user_group}}
           image: {{ .Values.manager.image.repository }}:{{ .Values.manager.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.manager.image.pullPolicy }}
           ports:

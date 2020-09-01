@@ -59,6 +59,8 @@ Parameter | Description | Default
 `namespace.create` | Specifies whether a custom namespace should be created. If false default to `capsule-system`. | `false`
 `namespace.name` | Currently is not yet supported. | `null`
 `force_tenant_prefix` | When set, all namespaces created in the tenant must follow the following naming convention: *tanant-namespace* otherwise the namespace creation is denied by the controller. This is a global setting valid for all tenants.| `false`
+`protected_namespace_regex` | When set, tenant users won't be able to create namespaces, which matches this regular expression. | 
+`capsule_user_group` | Group for capsule users.| `capsule.clastix.io`
 `log_level` | Set the log verbosity of the controller with a value from 1 to 10.| `4`
 `manager.image.repository` | Set the image repository of the controller. | `quay.io/clastix/capsule`
 `manager.image.tag` | Overrides the image tag whose default is the chart. `appVersion` | `null`
