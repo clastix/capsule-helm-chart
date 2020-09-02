@@ -1,0 +1,19 @@
+- Capsule Operator Helm Chart deployed:
+
+   # Check the capsule logs
+   $ kubectl logs -f deployment/{{ template "capsule.fullname" . }}-controller-manager -c manager -n {{ include "capsule.namespace" . }}
+
+
+   # Check the capsule logs
+   $ kubectl logs -f deployment/{{ template "capsule.fullname" . }}-controller-manager -c manager -n{{ include "capsule.namespace" . }}
+
+- Manage this chart:
+
+   # Upgrade Capsule
+   $ helm upgrade {{ .Release.Name }} -f <values.yaml> capsule -n {{ include "capsule.namespace" . }}
+
+   # Show this status again
+   $ helm status {{ .Release.Name }} -n {{ include "capsule.namespace" . }}
+
+   # Uninstall Capsule
+   $ helm uninstall {{ .Release.Name }} -n {{ include "capsule.namespace" . }}
