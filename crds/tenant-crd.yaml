@@ -15,6 +15,7 @@ spec:
     shortNames:
     - tnt
     singular: tenant
+  preserveUnknownFields: true
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -27,8 +28,12 @@ spec:
       name: Namespace count
       type: integer
     - description: The assigned Tenant owner
-      jsonPath: .spec.owner
-      name: Owner
+      jsonPath: .spec.owner.name
+      name: Owner name
+      type: string
+    - description: The assigned Tenant owner kind
+      jsonPath: .spec.owner.kind
+      name: Owner kind
       type: string
     - description: Age
       jsonPath: .metadata.creationTimestamp
@@ -139,6 +144,22 @@ spec:
               namespaceQuota:
                 minimum: 1
                 type: integer
+              namespacesMetadata:
+                properties:
+                  additionalAnnotations:
+                    additionalProperties:
+                      type: string
+                    nullable: true
+                    type: object
+                  additionalLabels:
+                    additionalProperties:
+                      type: string
+                    nullable: true
+                    type: object
+                required:
+                - additionalAnnotations
+                - additionalLabels
+                type: object
               networkPolicies:
                 items:
                   description: NetworkPolicySpec provides the specification of a NetworkPolicy
@@ -620,7 +641,19 @@ spec:
                   type: string
                 type: object
               owner:
-                type: string
+                description: OwnerSpec defines tenant owner name and kind
+                properties:
+                  kind:
+                    enum:
+                    - User
+                    - Group
+                    type: string
+                  name:
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
               resourceQuotas:
                 items:
                   description: ResourceQuotaSpec defines the desired hard limits to
@@ -686,6 +719,22 @@ spec:
                       type: array
                   type: object
                 type: array
+              servicesMetadata:
+                properties:
+                  additionalAnnotations:
+                    additionalProperties:
+                      type: string
+                    nullable: true
+                    type: object
+                  additionalLabels:
+                    additionalProperties:
+                      type: string
+                    nullable: true
+                    type: object
+                required:
+                - additionalAnnotations
+                - additionalLabels
+                type: object
               storageClasses:
                 items:
                   type: string

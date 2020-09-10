@@ -1,7 +1,9 @@
 # Deploying the Capsule Operator
+
 Use the Capsule Operator for easily implementing, managing, and maintaining mutitenancy and access control in Kubernetes.
 
 ## Requirements
+
 * [Helm 3](https://github.com/helm/helm/releases) is required when installing the Capsule Operator chart. Follow Helm’s official [steps](https://helm.sh/docs/intro/install/) for installing helm on your particular operating system.
 
 * A Kubernetes cluster 1.16+ with following [Admission Controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) enabled:
@@ -15,6 +17,7 @@ Use the Capsule Operator for easily implementing, managing, and maintaining muti
 * A [`kubeconfig`](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file accessing the Kubernetes cluster with cluster admin permissions.
 
 ## Quick Start
+
 The Capsule Operator Chart can be used to instantly deploy the Capsule Operator on your Kubernetes cluster.
 
 1. Clone this repo:
@@ -38,6 +41,7 @@ The Capsule Operator Chart can be used to instantly deploy the Capsule Operator 
         $ helm uninstall capsule -n capsule-system
 
 ## Customize the installation
+
 There are two methods for specifying overrides of values during chart installation: `--values` and `--set`.
 
 The `--values` option is the preferred method because it allows you to keep your overrides in a YAML file, rather than specifying them all on the command line. Create a copy of the YAML file `values.yaml` and add your overrides to it.
@@ -59,7 +63,10 @@ Parameter | Description | Default
 `namespace.create` | Specifies whether a custom namespace should be created. If false default to `capsule-system`. | `false`
 `namespace.name` | Currently is not yet supported. | `null`
 `force_tenant_prefix` | When set, all namespaces created in the tenant must follow the following naming convention: *tanant-namespace* otherwise the namespace creation is denied by the controller. This is a global setting valid for all tenants.| `false`
-`log_level` | Set the log verbosity of the controller with a value from 1 to 10.| `4`
+`manager.options.logLevel` | Set the log verbosity of the controller with a value from 1 to 10.| `4`
+`manager.options.forceTenantPrefix` | Boolean, enforces the Tenant owner, during Namespace creation, to name it using the selected Tenant name as prefix, separated by a dash | `false`
+`manager.options.capsuleUserGroup` | Override the Capsule user group | `capsule.clastix.io`
+`manager.options.protectedNamespaceRegex` | If specified, disallows creation of namespaces matching the passed regexp | `null`
 `manager.image.repository` | Set the image repository of the controller. | `quay.io/clastix/capsule`
 `manager.image.tag` | Overrides the image tag whose default is the chart. `appVersion` | `null`
 `manager.image.pullPolicy` | Set the image pull policy. | `IfNotPresent`
@@ -87,6 +94,7 @@ Parameter | Description | Default
 `podSecurityPolicy.enabled` | Specify if a Pod Security Policy must be created. | `false`
 
 ## Created resources
+
 This Helm Chart cretes the following Kubernetes resources in the release namespace:
 
 * Capsule Namespace
@@ -106,12 +114,10 @@ And optionally, depending on the values set:
 * PodSecurityPolicy
 * RBAC ClusterRole and RoleBinding for pod security policy
 
-
-
-
 ## Notes on installing Custom Resource Definitions with Helm3
+
 Capsule, as many other add-ons, defines its own set of Custom Resource Definitions (CRDs). Helm3 removed the old CRDs installation method for a more simple methodology. In the Helm Chart, there is now a special directory called `crds` to hold the CRDs. These CRDs are not templated, but will be installed by default when running a `helm install` for the chart. If the CRDs already exist (for example, you already executed `helm install`), it will be skipped with a warning. When you wish to skip the CRDs installation, and do not see the warning, you can pass the `--skip-crds` flag to the `helm install` command.
 
 ## More
-See Capsule [use cases](https://github.com/clastix/capsule/blob/master/use_cases.md) for more information about how to use Capsule.
 
+See Capsule [use cases](https://github.com/clastix/capsule/blob/master/use_cases.md) for more information about how to use Capsule.
