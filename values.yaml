@@ -5,13 +5,18 @@
 namespace:
   create: false
   name: ""
-force_tenant_prefix: false
-log_level: 4
+
 manager:
   image:
     repository: quay.io/clastix/capsule
     pullPolicy: IfNotPresent
     tag: ''
+  # Additional Capsule options
+  options:
+    logLevel:
+    forceTenantPrefix:
+    capsuleUserGroup:
+    protectedNamespaceRegex:
   resources:
     limits:
       cpu: 200m
