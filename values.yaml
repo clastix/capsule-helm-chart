@@ -10,8 +10,8 @@ manager:
   # Additional Capsule options
   options:
     logLevel: '4'
-    forceTenantPrefix: 'false'
-    capsuleUserGroup: 'capsule.clastix.io'
+    forceTenantPrefix:
+    capsuleUserGroup:
     protectedNamespaceRegex:
   resources:
     limits:
