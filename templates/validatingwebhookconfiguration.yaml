@@ -4,7 +4,6 @@ metadata:
   name: {{ include "capsule.fullname" . }}-validating-webhook-configuration
   labels:
     {{- include "capsule.labels" . | nindent 4 }}
-  namespace: {{ include "capsule.namespace" . }}
 webhooks:
 - admissionReviewVersions:
   - v1beta1
@@ -12,7 +11,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /validating-ingress
       port: 443
   failurePolicy: Fail
@@ -40,7 +39,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /validate-v1-namespace-quota
       port: 443
   failurePolicy: Fail
@@ -66,7 +65,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /validating-v1-network-policy
       port: 443
   failurePolicy: Fail
@@ -94,7 +93,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /validating-v1-pvc
       port: 443
   failurePolicy: Fail
@@ -120,7 +119,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /validating-v1-tenant-name
       port: 443
   failurePolicy: Fail
@@ -146,7 +145,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /validating-v1-namespace-tenant-prefix
       port: 443
   failurePolicy: Fail

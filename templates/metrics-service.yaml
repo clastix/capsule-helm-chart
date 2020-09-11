@@ -4,7 +4,6 @@ metadata:
   name: {{ include "capsule.fullname" . }}-controller-manager-metrics-service
   labels:
     {{- include "capsule.labels" . | nindent 4 }}
-  namespace: {{ include "capsule.namespace" . }}
 spec:
   ports:
   - port: 8443
