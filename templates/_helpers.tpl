@@ -61,13 +61,3 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
-{{/*
-Create the namespace to use
-*/}}
-{{- define "capsule.namespace" -}}
-{{- if .Values.namespace.create }}
-{{- default "capsule-system" .Values.namespace.name }}
-{{- else }}
-{{- default "capsule-system" }}
-{{- end }}
-{{- end }}

@@ -4,5 +4,4 @@ metadata:
   labels:
     {{- include "capsule.labels" . | nindent 4 }}
   name: {{ include "capsule.fullname" . }}-tls
-  namespace: {{ include "capsule.namespace" . }}
 data:

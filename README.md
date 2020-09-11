@@ -60,9 +60,6 @@ Here the values you can override:
 
 Parameter | Description | Default
 --- | --- | ---
-`namespace.create` | Specifies whether a custom namespace should be created. If false default to `capsule-system`. | `false`
-`namespace.name` | Currently is not yet supported. | `null`
-`force_tenant_prefix` | When set, all namespaces created in the tenant must follow the following naming convention: *tanant-namespace* otherwise the namespace creation is denied by the controller. This is a global setting valid for all tenants.| `false`
 `manager.options.logLevel` | Set the log verbosity of the controller with a value from 1 to 10.| `4`
 `manager.options.forceTenantPrefix` | Boolean, enforces the Tenant owner, during Namespace creation, to name it using the selected Tenant name as prefix, separated by a dash | `false`
 `manager.options.capsuleUserGroup` | Override the Capsule user group | `capsule.clastix.io`

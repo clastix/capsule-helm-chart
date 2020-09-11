@@ -4,7 +4,6 @@ metadata:
   name: {{ include "capsule.fullname" . }}-mutating-webhook-configuration
   labels:
     {{- include "capsule.labels" . | nindent 4 }}
-  namespace: {{ include "capsule.namespace" . }}
 webhooks:
 - admissionReviewVersions:
   - v1beta1
@@ -12,7 +11,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /mutate-v1-namespace-owner-reference
       port: 443
   failurePolicy: Fail
@@ -39,7 +38,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ include "capsule.namespace" . }}
+      namespace: {{ .Release.Namespace }}
       path: /mutate-v1-service-labels
       port: 443
   failurePolicy: Ignore
