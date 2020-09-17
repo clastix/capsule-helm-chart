@@ -31,7 +31,7 @@ webhooks:
     resources:
     - ingresses
     scope: '*'
-  sideEffects: Unknown
+  sideEffects: NoneOnDryRun
   timeoutSeconds: 30
 - admissionReviewVersions:
   - v1beta1
@@ -57,7 +57,7 @@ webhooks:
     resources:
     - namespaces
     scope: '*'
-  sideEffects: Unknown
+  sideEffects: NoneOnDryRun
   timeoutSeconds: 30
 - admissionReviewVersions:
   - v1beta1
@@ -85,7 +85,7 @@ webhooks:
     resources:
     - networkpolicies
     scope: '*'
-  sideEffects: Unknown
+  sideEffects: NoneOnDryRun
   timeoutSeconds: 30
 - admissionReviewVersions:
   - v1beta1
@@ -111,7 +111,7 @@ webhooks:
     resources:
     - persistentvolumeclaims
     scope: '*'
-  sideEffects: Unknown
+  sideEffects: NoneOnDryRun
   timeoutSeconds: 30
 - admissionReviewVersions:
   - v1beta1
@@ -120,11 +120,11 @@ webhooks:
     service:
       name: {{ include "capsule.fullname" . }}-webhook-service
       namespace: {{ .Release.Namespace }}
-      path: /validating-v1-tenant-name
+      path: /validating-v1-tenant
       port: 443
   failurePolicy: Fail
   matchPolicy: Exact
-  name: tenant.name.capsule.clastix.io
+  name: tenant.capsule.clastix.io
   namespaceSelector: {}
   objectSelector: {}
   rules:
@@ -137,7 +137,7 @@ webhooks:
     resources:
     - tenants
     scope: '*'
-  sideEffects: Unknown
+  sideEffects: NoneOnDryRun
   timeoutSeconds: 30
 - admissionReviewVersions:
   - v1beta1
@@ -163,5 +163,5 @@ webhooks:
     resources:
     - namespaces
     scope: '*'
-  sideEffects: Unknown
+  sideEffects: NoneOnDryRun
   timeoutSeconds: 30
