@@ -31,7 +31,7 @@ webhooks:
     - namespaces
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.mutatingWebhooksTimeoutSeconds }}
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
@@ -63,4 +63,4 @@ webhooks:
     - endpointslices
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.mutatingWebhooksTimeoutSeconds }}
