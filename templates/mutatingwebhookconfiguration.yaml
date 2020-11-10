@@ -32,35 +32,3 @@ webhooks:
     scope: '*'
   sideEffects: NoneOnDryRun
   timeoutSeconds: {{ .Values.mutatingWebhooksTimeoutSeconds }}
-- admissionReviewVersions:
-  - v1beta1
-  clientConfig:
-    caBundle: Cg==
-    service:
-      name: {{ include "capsule.fullname" . }}-webhook-service
-      namespace: {{ .Release.Namespace }}
-      path: /mutate-v1-service-labels
-      port: 443
-  failurePolicy: Ignore
-  matchPolicy: Exact
-  name: service.labels.capsule.clastix.io
-  namespaceSelector: {}
-  objectSelector: {}
-  reinvocationPolicy: Never
-  rules:
-  - apiGroups:
-    - ""
-    - discovery.k8s.io
-    apiVersions:
-    - v1
-    - v1beta1
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - services
-    - endpoints
-    - endpointslices
-    scope: '*'
-  sideEffects: NoneOnDryRun
-  timeoutSeconds: {{ .Values.mutatingWebhooksTimeoutSeconds }}
