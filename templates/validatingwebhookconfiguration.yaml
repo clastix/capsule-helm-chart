@@ -58,7 +58,7 @@ webhooks:
     - namespaces
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
