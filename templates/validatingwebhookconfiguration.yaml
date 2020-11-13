@@ -32,7 +32,7 @@ webhooks:
     - ingresses
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
@@ -58,7 +58,7 @@ webhooks:
     - namespaces
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}30
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
@@ -86,7 +86,7 @@ webhooks:
     - networkpolicies
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
@@ -112,7 +112,7 @@ webhooks:
     - persistentvolumeclaims
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
@@ -138,7 +138,7 @@ webhooks:
     - tenants
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
 - admissionReviewVersions:
   - v1beta1
   clientConfig:
@@ -164,4 +164,4 @@ webhooks:
     - namespaces
     scope: '*'
   sideEffects: NoneOnDryRun
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
