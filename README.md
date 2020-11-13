@@ -79,6 +79,7 @@ Parameter | Description | Default
 `proxy.resources.limits/cpu` | Set the CPU limits assigned to the rbac proxy. | `100m`
 `proxy.resources.limits/cpu` | Set the memory limits assigned to the rbac proxy. | `128Mi`
 `mutatingWebhooksTimeoutSeconds` | Timeout in seconds for mutating webhooks. | `30`
+`validatingWebhooksTimeoutSeconds` | Timeout in seconds for validating webhooks. | `30`
 `imagePullSecrets` | Configuration for `imagePullSecrets` so that you can use a private images registry. | `[]`
 `serviceAccount.create` | Specifies whether a service account should be created. | `true`
 `serviceAccount.annotations` | Annotations to add to the service account. | `{}`
