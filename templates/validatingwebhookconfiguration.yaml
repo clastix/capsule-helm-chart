@@ -16,8 +16,11 @@ webhooks:
       port: 443
   failurePolicy: Fail
   matchPolicy: Exact
-  name: ingress.capsule.clastix.io
-  namespaceSelector: {}
+  name: ingress-v1beta1.capsule.clastix.io
+  namespaceSelector:
+    matchExpressions:
+    - key: capsule.clastix.io/tenant
+      operator: Exists
   objectSelector: {}
   rules:
   - apiGroups:
@@ -25,6 +28,36 @@ webhooks:
     - extensions
     apiVersions:
     - v1beta1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - ingresses
+    scope: '*'
+  sideEffects: NoneOnDryRun
+  timeoutSeconds: {{ .Values.validatingWebhooksTimeoutSeconds }}
+- admissionReviewVersions:
+  - v1beta1
+  clientConfig:
+    caBundle: Cg==
+    service:
+      name: {{ include "capsule.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validating-ingress
+      port: 443
+  failurePolicy: Fail
+  matchPolicy: Exact
+  name: ingress-v1.capsule.clastix.io
+  namespaceSelector:
+    matchExpressions:
+    - key: capsule.clastix.io/tenant
+      operator: Exists
+  objectSelector: {}
+  rules:
+  - apiGroups:
+    - networking.k8s.io
+    apiVersions:
+    - v1
     operations:
     - CREATE
     - UPDATE
@@ -71,7 +104,9 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Exact
   name: validating.network-policy.capsule.clastix.io
-  namespaceSelector: {}
+    matchExpressions:
+    - key: capsule.clastix.io/tenant
+      operator: Exists
   objectSelector: {}
   rules:
   - apiGroups:
@@ -99,7 +134,10 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Exact
   name: pvc.capsule.clastix.io
-  namespaceSelector: {}
+  namespaceSelector:
+    matchExpressions:
+    - key: capsule.clastix.io/tenant
+      operator: Exists
   objectSelector: {}
   rules:
   - apiGroups:
