@@ -61,6 +61,20 @@ spec:
         spec:
           description: TenantSpec defines the desired state of Tenant
           properties:
+            containerRegistries:
+              properties:
+                allowed:
+                  items:
+                    type: string
+                  nullable: true
+                  type: array
+                allowedRegex:
+                  nullable: true
+                  type: string
+              required:
+              - allowed
+              - allowedRegex
+              type: object
             additionalRoleBindings:
               items:
                 properties:
