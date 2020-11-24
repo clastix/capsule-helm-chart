@@ -104,6 +104,7 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Exact
   name: validating.network-policy.capsule.clastix.io
+  namespaceSelector:
     matchExpressions:
     - key: capsule.clastix.io/tenant
       operator: Exists
