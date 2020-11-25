@@ -61,3 +61,9 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
+{{/*
+Create the fully-qualified Docker image to use
+*/}}
+{{- define "capsule.fullyQualifiedDockerImage" -}}
+{{- printf "%s:%s" .Values.manager.image.repository ( .Values.manager.image.tag | default (printf "v%s" .Chart.AppVersion) ) -}}
+{{- end }}
